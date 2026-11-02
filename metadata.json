@@ -1,0 +1,7 @@
+{
+  "name": "Siap Operasi",
+  "description": "Aplikasi Checklist & Edukasi Pra-Bedah untuk keperawatan anestesiologi berbasis Checklist-Based Counseling (Dawod et al., 2024).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

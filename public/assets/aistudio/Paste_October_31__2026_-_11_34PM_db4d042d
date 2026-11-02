@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="id" data-font-preset="normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#00629b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Siap Operasi">
+  <title>Siap Operasi - Edukasi & Checklist Pra-Bedah Anestesi</title>
+
+  <style>
+    :root {
+      --font-scale: 1;
+      --primary: #00629b;
+      --primary-light: #eef8ff;
+      --primary-dark: #004c7a;
+      --teal: #0d9488;
+      --teal-light: #f0fdfa;
+      --teal-dark: #0f766e;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #e2e8f0;
+      color: var(--slate-800);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 460px;
+      background: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .sticky-top-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    header {
+      padding: calc(10px + var(--sat)) 14px 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--teal-light);
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .brand-text h1 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-text p {
+      font-size: 10.5px;
+      color: var(--slate-600);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .badge-count {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: var(--teal);
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 10px;
+    }
+
+    .font-control-bar {
+      background: var(--primary-light);
+      border-top: 1px solid #dbeafe;
+      padding: 5px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .font-control-info {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .font-control-icon {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 12px;
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 3px 6px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .font-control-status {
+      font-size: 11.5px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .font-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .font-btn {
+      height: 30px;
+      padding: 0 9px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid #93c5fd;
+      background: #ffffff;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .font-btn-normal.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .font-btn-increase {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #ffffff;
+      padding: 0 10px;
+      font-size: 12.5px;
+      font-weight: 800;
+    }
+
+    main {
+      flex: 1;
+      padding: 12px 14px calc(84px + var(--sab)) 14px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--teal-dark) 100%);
+      color: white;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 10px rgba(0, 98, 155, 0.16);
+    }
+
+    .hero-tag {
+      font-size: calc(10.5px * var(--font-scale));
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #99f6e4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .hero-banner h2 {
+      font-size: calc(16px * var(--font-scale));
+      font-weight: 800;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+
+    .hero-banner p {
+      font-size: calc(12px * var(--font-scale));
+      opacity: 0.95;
+      line-height: 1.45;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .card-gray {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: calc(13.5px * var(--font-scale));
+      font-weight: 700;
+      color: var(--slate-800);
+      line-height: 1.35;
+    }
+
+    .section-subtitle {
+      font-size: calc(11.5px * var(--font-scale));
+      color: var(--slate-600);
+      line-height: 1.4;
+    }
+
+    .body-copy {
+      font-size: calc(12.5px * var(--font-scale));
+      color: var(--slate-700);
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 11px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: calc(12px * var(--font-scale));
+      font-weight: 700;
+      color: var(--slate-800);
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 9px 12px;
+      font-size: max(16px, calc(15px * var(--font-scale)));
+      border: 1.5px solid var(--slate-300);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--slate-900);
+      outline: none;
+      line-height: 1.35;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .chip-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
+    }
+
+    .chip-btn {
+      background: #ffffff;
+      border: 1px solid var(--slate-300);
+      color: var(--slate-800);
+      font-size: calc(11.5px * var(--font-scale));
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      width: 100%;
+      min-height: 44px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(0, 98, 155, 0.22);
+    }
+
+    .btn-teal {
+      background: var(--teal);
+      color: white;
+      border: none;
+      min-height: 44px;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .btn-outline-teal {
+      background: var(--teal-light);
+      border: 1.5px solid #5eead4;
+      color: var(--teal-dark);
+      min-height: 40px;
+      font-size: calc(12.5px * var(--font-scale));
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .btn-outline-red {
+      background: #fef2f2;
+      border: 1.5px solid #fca5a5;
+      color: #b91c1c;
+      min-height: 40px;
+      font-size: calc(12.5px * var(--font-scale));
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .checklist-card {
+      background: white;
+      border: 1.5px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+
+    .checklist-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .checklist-checkbox {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      min-height: 20px;
+      accent-color: var(--teal);
+      cursor: pointer;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .category-badge {
+      font-size: calc(10px * var(--font-scale));
+      font-weight: 700;
+      text-transform: uppercase;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      padding: 2px 7px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .item-title {
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 800;
+      color: var(--slate-900);
+      line-height: 1.3;
+    }
+
+    .item-desc {
+      font-size: calc(12.5px * var(--font-scale));
+      color: var(--slate-700);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .step-box {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: calc(12px * var(--font-scale));
+      color: var(--slate-800);
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+
+    .step-box strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 4px;
+      font-size: calc(12.5px * var(--font-scale));
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .progress-pct {
+      font-size: calc(16px * var(--font-scale));
+      font-weight: 800;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* APAIS Questionnaire Styles */
+    .apais-question-card {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .apais-question-title {
+      font-size: calc(12.5px * var(--font-scale));
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .apais-options {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+    }
+
+    .apais-option-label {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      padding: 6px 2px;
+      text-align: center;
+      cursor: pointer;
+      font-size: calc(11px * var(--font-scale));
+      font-weight: 600;
+      color: var(--slate-700);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .apais-option-label input {
+      accent-color: var(--primary);
+    }
+
+    .apais-score-summary {
+      background: var(--primary-light);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+
+    .score-box-item div:first-child {
+      font-size: calc(11px * var(--font-scale));
+      color: var(--slate-600);
+      font-weight: 600;
+    }
+
+    .score-box-item div:last-child {
+      font-size: calc(16px * var(--font-scale));
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 460px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-top: 1px solid var(--slate-200);
+      display: flex;
+      justify-content: space-around;
+      padding-top: 8px;
+      padding-bottom: calc(8px + var(--sab));
+      z-index: 50;
+    }
+
+    .nav-item {
+      background: none;
+      border: none;
+      flex: 1;
+      min-height: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: var(--slate-600);
+      cursor: pointer;
+      font-size: min(14px, calc(11.5px * var(--font-scale)));
+      font-weight: 600;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .nav-item svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(5px);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.show { display: flex; }
+
+    .modal-content {
+      background: white;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 420px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 20px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--slate-200);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .modal-title {
+      font-size: calc(16px * var(--font-scale));
+      font-weight: 800;
+      color: var(--slate-900);
+    }
+
+    .modal-close {
+      background: var(--slate-100);
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: var(--slate-700);
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    @keyframes breathPulse {
+      0%, 100% { transform: scale(1); opacity: 0.88; }
+      50% { transform: scale(1.28); opacity: 1; }
+    }
+
+    .breathing-box {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--primary) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 28px auto;
+      animation: breathPulse 12s infinite ease-in-out;
+      font-size: calc(13px * var(--font-scale));
+      font-weight: 700;
+      padding: 14px;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+
+    .emergency-box {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      padding: 12px;
+      border-radius: 12px;
+      font-size: calc(13px * var(--font-scale));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .record-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-size: calc(12.5px * var(--font-scale));
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <div class="sticky-top-wrapper">
+      <header>
+        <div class="brand-group">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h1>Siap Operasi</h1>
+            <p>Checklist Edukasi Pra-Bedah (Dawod et al., 2024)</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" onclick="openVideoSettings()" title="Pengaturan Video">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/>
+            </svg>
+          </button>
+          <button class="icon-btn" onclick="openResearchModal()" title="Rekap Data Riset">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM10 13l3.5-3.5 1.41 1.41L11.41 14.4l-1.41-1.4z"/>
+            </svg>
+            <span id="sessionBadge" class="badge-count hidden">0</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="font-control-bar">
+        <div class="font-control-info">
+          <span class="font-control-icon">Aa</span>
+          <span class="font-control-status" id="fontStatusLabel">Ukuran Huruf: Normal (100%)</span>
+        </div>
+        <div class="font-btn-group">
+          <button type="button" class="font-btn" onclick="decreaseFontSize()">A-</button>
+          <button type="button" id="btnFontNormal" class="font-btn font-btn-normal active" onclick="resetFontSize()">Normal</button>
+          <button type="button" class="font-btn font-btn-increase" onclick="increaseFontSize()">A+</button>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <!-- TAB 1: PROFIL -->
+      <section id="tab-profile">
+        <div class="hero-banner">
+          <div class="hero-tag"><span>Tahap 1: Registrasi Pra-Bedah</span><span>★</span></div>
+          <h2>Identitas Pasien</h2>
+          <p>Lengkapi data diri pasien sebelum memulai checklist edukasi persiapan anestesi.</p>
+        </div>
+
+        <div class="card-gray">
+          <div class="form-group">
+            <label for="inputName">Nama Lengkap Pasien *</label>
+            <input type="text" id="inputName" class="form-control" placeholder="Contoh: Ny. Siti Rahmawati">
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="inputAge">Usia (Tahun) *</label>
+              <input type="number" id="inputAge" class="form-control" placeholder="Contoh: 62">
+            </div>
+            <div class="form-group">
+              <label for="inputGender">Jenis Kelamin *</label>
+              <select id="inputGender" class="form-control">
+                <option value="Perempuan">Perempuan</option>
+                <option value="Laki-laki">Laki-laki</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputSurgery">Rencana Tindakan Operasi *</label>
+            <input type="text" id="inputSurgery" class="form-control" placeholder="Contoh: Seksio Sesarea (SC)">
+            <div class="chip-container">
+              <button type="button" class="chip-btn" onclick="setSurgery('Apendiktomi')">+ Apendiktomi</button>
+              <button type="button" class="chip-btn" onclick="setSurgery('Seksio Sesarea (SC)')">+ Seksio Sesarea</button>
+              <button type="button" class="chip-btn" onclick="setSurgery('ORIF Fraktur')">+ ORIF Fraktur</button>
+              <button type="button" class="chip-btn" onclick="setSurgery('Laparoskopi')">+ Laparoskopi</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputRM">No. Rekam Medis (RM) / Kamar</label>
+            <input type="text" id="inputRM" class="form-control" placeholder="Contoh: RM-98231 / Kamar Melati 3">
+          </div>
+
+          <button type="button" class="btn-primary" onclick="saveProfileAndNext()" style="margin-top: 10px;">
+            <span>Simpan & Lanjut ke Edukasi</span><span>➔</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TAB 2: CHECKLIST EDUKASI -->
+      <section id="tab-checklist" class="hidden">
+        <div class="hero-banner" style="background: linear-gradient(135deg, var(--teal) 0%, var(--primary) 100%);">
+          <div class="hero-tag"><span>Dawod et al. (2024) Protocol</span><span>✓</span></div>
+          <h2>Checklist Edukasi Pra-Bedah</h2>
+          <p>4 Domain Konseling Utama untuk memastikan kesiapan dan menurunkan kecemasan.</p>
+        </div>
+
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px;">
+          <div>
+            <div class="section-title">Kemajuan Edukasi Pasien</div>
+            <div class="section-subtitle" id="progressText">0 dari 4 Domain Selesai</div>
+          </div>
+          <div class="progress-pct" id="progressPercent">0%</div>
+        </div>
+
+        <!-- Domain 1: Prosedur Pembedahan & Informasi Anestesi -->
+        <div class="checklist-card">
+          <label class="checklist-header">
+            <input type="checkbox" id="check-procedure" class="checklist-checkbox" onchange="toggleCheck('procedure')">
+            <div>
+              <span class="category-badge">Domain 1: Prosedur & Anestesi</span>
+              <div class="item-title">Prosedur Operasi & Pembiusan Umum</div>
+            </div>
+          </label>
+          <div class="item-desc">Penjelasan tahapan pembiusan umum (general anesthesia) dari ruang persiapan, pembiusan, hingga pemulihan kesadaran.</div>
+          <div class="step-box">
+            <strong>Hal yang perlu diketahui:</strong>
+            • Pasien akan dipasang alat pemantau tanda vital.<br>
+            • Obat bius diberikan via infus atau inhalasi sehingga pasien tertidur lelap tanpa rasa nyeri.<br>
+            • Tim anestesi akan mendampingi dan memantau kondisi pasien sepanjang operasi.
+          </div>
+          <button type="button" class="btn-outline-red" style="width: 100%;" onclick="playVideoByKey('procedure')">
+            <span>▶</span> <span>Tonton Video Prosedur Anestesi</span>
+          </button>
+        </div>
+
+        <!-- Domain 2: Persiapan Preoperasi -->
+        <div class="checklist-card">
+          <label class="checklist-header">
+            <input type="checkbox" id="check-prep" class="checklist-checkbox" onchange="toggleCheck('prep')">
+            <div>
+              <span class="category-badge">Domain 2: Persiapan</span>
+              <div class="item-title">Persiapan Pre-Operasi & Puasa</div>
+            </div>
+          </label>
+          <div class="item-desc">Panduan persiapan fisik, kepatuhan jadwal puasa, serta pelepasan aksesoris demi keselamatan.</div>
+          <div class="step-box">
+            <strong>Langkah Persiapan:</strong>
+            • Puasa makan berat 8 jam, makan ringan 6 jam, air putih jernih hingga 2 jam sebelum operasi.<br>
+            • Lepas perhiasan, gigi palsu, cat kuku, dan barang berharga.<br>
+            • Kenakan pakaian khusus pembedahan dari rumah sakit.
+          </div>
+          <button type="button" class="btn-outline-red" style="width: 100%;" onclick="playVideoByKey('prep')">
+            <span>▶</span> <span>Tonton Video Persiapan & Puasa</span>
+          </button>
+        </div>
+
+        <!-- Domain 3: Risiko & Komplikasi Efek Bius -->
+        <div class="checklist-card">
+          <label class="checklist-header">
+            <input type="checkbox" id="check-sideeffects" class="checklist-checkbox" onchange="toggleCheck('sideeffects')">
+            <div>
+              <span class="category-badge">Domain 3: Risiko & Komplikasi</span>
+              <div class="item-title">Antisipasi Efek Samping (PONV, Shivering, Pusing)</div>
+            </div>
+          </label>
+          <div class="item-desc">Pemahaman tentang efek sisa obat anestesi seperti mual muntah (PONV), menggigil, dan pusing[cite: 1, 2].</div>
+          <div class="step-box">
+            <strong>Antisipasi & Penanganan:</strong>
+            • <strong>Mual/Muntah (PONV):</strong> Miringkan kepala dan laporkan ke perawat.<br>
+            • <strong>Menggigil (Shivering):</strong> Selimut penghangat khusus akan dipasang di ruang pemulihan.<br>
+            • <strong>Pusing/Mengantuk:</strong> Tetap berbaring dan gunakan pagar pengaman tempat tidur.
+          </div>
+          <button type="button" class="btn-outline-red" style="width: 100%;" onclick="playVideoByKey('sideeffects')">
+            <span>▶</span> <span>Tonton Video Antisipasi Efek Samping</span>
+          </button>
+        </div>
+
+        <!-- Domain 4: Perawatan Pascaoperasi, Manajemen Nyeri & Teknik Koping -->
+        <div class="checklist-card">
+          <label class="checklist-header">
+            <input type="checkbox" id="check-pain" class="checklist-checkbox" onchange="toggleCheck('pain')">
+            <div>
+              <span class="category-badge">Domain 4: Nyeri & Koping</span>
+              <div class="item-title">Manajemen Nyeri & Relaksasi Napas Dalam</div>
+            </div>
+          </label>
+          <div class="item-desc">Strategi mengontrol nyeri pasca-bedah dengan kombinasi obat analgetik dan teknik koping relaksasi mandiri.</div>
+          <div class="step-box">
+            <strong>Langkah Relaksasi Napas Dalam:</strong>
+            • Tarik napas perlahan lewat hidung (4 detik).<br>
+            • Tahan sejenak (2 detik).<br>
+            • Hembuskan perlahan lewat mulut mengerucut (6 detik).<br>
+            • Laporkan skala nyeri Anda (1-10) segera ke perawat.
+          </div>
+          <div class="btn-row">
+            <button type="button" class="btn-outline-teal" onclick="openBreathingModal()">
+              <span>🌬️</span> <span>Latihan Nafas</span>
+            </button>
+            <button type="button" class="btn-outline-red" style="flex: 1;" onclick="playVideoByKey('pain')">
+              <span>▶</span> <span>Tonton Video Nyeri</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" onclick="switchTab('evaluation')" style="margin-top: 10px;">
+          <span>Lanjut ke Evaluasi Kuesioner APAIS</span><span>➔</span>
+        </button>
+      </section>
+
+      <!-- TAB 3: EVALUASI MENGGUNAKAN KUESIONER APAIS (SESUAI SKRIPSI) -->
+      <section id="tab-evaluation" class="hidden">
+        <div class="hero-banner" style="background: linear-gradient(135deg, #4f46e5 0%, var(--primary) 100%);">
+          <div class="hero-tag"><span>Instrumen Baku Skripsi</span><span>📊</span></div>
+          <h2>Kuesioner APAIS Versi Indonesia</h2>
+          <p>Amsterdam Preoperative Anxiety and Information Scale (Perdana et al., 2020)[cite: 1]. Berikan penilaian skala 1 sampai 5[cite: 1].</p>
+        </div>
+
+        <!-- Live Score Summary -->
+        <div class="apais-score-summary">
+          <div class="score-box-item">
+            <div>Skor Kecemasan</div>
+            <div id="apaisAnxietyScore">4</div>
+            <div style="font-size: 9.5px; color: var(--slate-500);">(Rentang: 4 - 20)</div>
+          </div>
+          <div class="score-box-item">
+            <div>Kebutuhan Informasi</div>
+            <div id="apaisInfoScore">2</div>
+            <div style="font-size: 9.5px; color: var(--slate-500);">(Rentang: 2 - 10)</div>
+          </div>
+        </div>
+
+        <div class="card-gray" style="padding: 10px;">
+          <div class="section-subtitle" style="margin-bottom: 10px; font-weight: bold; color: var(--slate-900);">
+            Keterangan Skala Likert: 1 = Sama sekali tidak, 2 = Tidak terlalu, 3 = Sedikit, 4 = Agak, 5 = Sangat[cite: 1]
+          </div>
+
+          <!-- APAIS Item 1 -->
+          <div class="apais-question-card">
+            <div class="apais-question-title">1. Saya takut dibius (Anestesi)[cite: 1]</div>
+            <div class="apais-options" id="apais-1">
+              <label class="apais-option-label"><input type="radio" name="apais1" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais1" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais1" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais1" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais1" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 2 -->
+          <div class="apais-question-card">
+            <div class="apais-question-title">2. Saya terus-menerus memikirkan tentang pembiusan[cite: 1]</div>
+            <div class="apais-options" id="apais-2">
+              <label class="apais-option-label"><input type="radio" name="apais2" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais2" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais2" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais2" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais2" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 3 (Information Need) -->
+          <div class="apais-question-card" style="border-color: #99f6e4; background: #f0fdfa;">
+            <div class="apais-question-title">3. Saya ingin tahu sebanyak mungkin tentang pembiusan[cite: 1]</div>
+            <div class="apais-options" id="apais-3">
+              <label class="apais-option-label"><input type="radio" name="apais3" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais3" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais3" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais3" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais3" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 4 -->
+          <div class="apais-question-card">
+            <div class="apais-question-title">4. Saya takut dioperasi (Pembedahan)[cite: 1]</div>
+            <div class="apais-options" id="apais-4">
+              <label class="apais-option-label"><input type="radio" name="apais4" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais4" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais4" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais4" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais4" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 5 -->
+          <div class="apais-question-card">
+            <div class="apais-question-title">5. Saya terus memikirkan tentang operasi[cite: 1]</div>
+            <div class="apais-options" id="apais-5">
+              <label class="apais-option-label"><input type="radio" name="apais5" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais5" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais5" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais5" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais5" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 6 (Information Need) -->
+          <div class="apais-question-card" style="border-color: #99f6e4; background: #f0fdfa;">
+            <div class="apais-question-title">6. Saya ingin tahu sebanyak mungkin tentang operasi[cite: 1]</div>
+            <div class="apais-options" id="apais-6">
+              <label class="apais-option-label"><input type="radio" name="apais6" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais6" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais6" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais6" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais6" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 12px;">
+            <label for="inputConcerns">Catatan / Kekhawatiran Khusus Pasien</label>
+            <textarea id="inputConcerns" class="form-control" rows="2" placeholder="Tuliskan keluhan atau hal lain yang dikhawatirkan pasien"></textarea>
+          </div>
+
+          <button type="button" class="btn-teal" onclick="saveEvaluationRecord()" style="margin-top: 10px;">
+            <span>💾</span><span>Simpan Hasil Skor APAIS</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TAB 4: INFO HUB -->
+      <section id="tab-infohub" class="hidden">
+        <div class="hero-banner" style="background: linear-gradient(135deg, var(--slate-800) 0%, var(--slate-900) 100%);">
+          <div class="hero-tag"><span>Pusat Informasi & Bantuan</span><span>ℹ</span></div>
+          <h2>Informasi & Kontak Tim Medis</h2>
+          <p>Panduan puasa kamar operasi, kontak perawat, dan kustomisasi link video.</p>
+        </div>
+
+        <button type="button" class="card" onclick="openVideoSettings()" style="width: 100%; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left;">
+          <div>
+            <div class="section-title">Atur Link Video YouTube Sendiri</div>
+            <div class="section-subtitle">Ubah URL YouTube untuk setiap domain edukasi</div>
+          </div>
+          <span style="font-size: 20px; color: var(--primary); font-weight: bold;">➔</span>
+        </button>
+
+        <div class="card">
+          <div class="section-title" style="margin-bottom: 8px;">🍽️ Aturan Puasa Pre-Operasi (ASA / ERAS)</div>
+          <div class="body-copy">
+            • Makanan Berat / Lemak: Stop 8 Jam sebelum operasi.<br>
+            • Makanan Ringan / Bubur: Stop 6 Jam sebelum operasi.<br>
+            • Air Putih Jernih: Maksimal 2 Jam sebelum bius.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-title" style="margin-bottom: 8px;">🚨 Kontak Darurat Ruang Perawatan</div>
+          <div class="body-copy" style="margin-bottom: 10px;">Jika mengalami keluhan nyeri hebat atau mual mendadak:</div>
+          <div class="emergency-box">
+            <span>Pos Perawat (Nurse Station):</span>
+            <strong style="color: var(--primary);">Ext. 119 / Bel Pasien</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav>
+      <button type="button" class="nav-item active" id="nav-profile" onclick="switchTab('profile')">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <span>Profil</span>
+      </button>
+      <button type="button" class="nav-item" id="nav-checklist" onclick="switchTab('checklist')">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <span>Checklist</span>
+      </button>
+      <button type="button" class="nav-item" id="nav-evaluation" onclick="switchTab('evaluation')">
+        <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+        <span>Evaluasi</span>
+      </button>
+      <button type="button" class="nav-item" id="nav-infohub" onclick="switchTab('infohub')">
+        <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+        <span>Info Hub</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- MODAL: VIDEO PLAYER -->
+  <div id="videoModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="videoModalTitle">Video Edukasi</div>
+        <button type="button" class="modal-close" onclick="closeVideoModal()">✕</button>
+      </div>
+      <div class="video-container">
+        <iframe id="videoIframe" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <button type="button" class="btn-primary" id="btnOpenInYoutube" style="margin-bottom: 8px;">Buka di Aplikasi YouTube</button>
+      <button type="button" class="btn-outline-teal" onclick="closeVideoModal()" style="width: 100%;">Tutup</button>
+    </div>
+  </div>
+
+  <!-- MODAL: PENGATURAN VIDEO YOUTUBE -->
+  <div id="videoSettingsModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Kustomisasi Link Video YouTube</div>
+        <button type="button" class="modal-close" onclick="closeVideoSettings()">✕</button>
+      </div>
+      <p class="section-subtitle" style="margin-bottom: 12px;">Masukkan URL YouTube untuk masing-masing domain:</p>
+      
+      <div class="form-group">
+        <label for="customVideoProcedure">1. Video Prosedur & Anestesi</label>
+        <input type="url" id="customVideoProcedure" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="customVideoPrep">2. Video Persiapan & Puasa</label>
+        <input type="url" id="customVideoPrep" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="customVideoSideeffects">3. Video Efek Samping & Komplikasi</label>
+        <input type="url" id="customVideoSideeffects" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="customVideoPain">4. Video Manajemen Nyeri</label>
+        <input type="url" id="customVideoPain" class="form-control">
+      </div>
+
+      <div class="btn-row" style="margin-top: 14px;">
+        <button type="button" class="btn-outline-teal" onclick="resetVideoUrls()">Reset Default</button>
+        <button type="button" class="btn-primary" onclick="saveCustomVideoUrls()" style="flex: 2;">Simpan Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LATIHAN NAFAS -->
+  <div id="breathingModal" class="modal-backdrop">
+    <div class="modal-content" style="text-align: center;">
+      <div class="modal-header">
+        <div class="modal-title">Latihan Napas Dalam Terpandu</div>
+        <button type="button" class="modal-close" onclick="closeBreathingModal()">✕</button>
+      </div>
+      <div class="breathing-box">Tarik Napas (4s)<br>Tahan (2s)<br>Hembuskan (6s)</div>
+      <p class="body-copy" style="margin-bottom: 16px;">Tarik napas dalam perlahan melalui hidung, tahan 2 detik, lalu hembuskan perlahan lewat bibir mengerucut.</p>
+      <button type="button" class="btn-primary" onclick="closeBreathingModal()">Selesai Latihan</button>
+    </div>
+  </div>
+
+  <!-- MODAL: REKAP DATA RISET -->
+  <div id="researchModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Rekap Data Riset APAIS</div>
+        <button type="button" class="modal-close" onclick="closeResearchModal()">✕</button>
+      </div>
+      <div class="btn-row" style="margin-bottom: 12px;">
+        <button type="button" class="btn-outline-teal" onclick="exportCSV()">📥 Ekspor CSV/Excel</button>
+        <button type="button" class="btn-outline-red" onclick="clearAllData()">Hapus Semua</button>
+      </div>
+      <div class="section-title" style="margin-bottom: 8px;">Total Pasien: <span id="recordCount">0</span></div>
+      <div id="recordsList" style="max-height: 260px; overflow-y: auto; margin-bottom: 12px;"></div>
+      <button type="button" class="btn-primary" onclick="closeResearchModal()">Tutup</button>
+    </div>
+  </div>
+
+  <script>
+    const FONT_PRESETS = [
+      { id: 'small',  scale: 0.90, label: 'Ukuran Huruf: Kecil (90%)' },
+      { id: 'normal', scale: 1.00, label: 'Ukuran Huruf: Normal (100%)' },
+      { id: 'large',  scale: 1.15, label: 'Ukuran Huruf: Besar (115%)' },
+      { id: 'xlarge', scale: 1.30, label: 'Ukuran Huruf: Sangat Besar (130%)' }
+    ];
+
+    let currentFontIndex = 1;
+
+    function applyFontPreset(index) {
+      if (index < 0 || index >= FONT_PRESETS.length) return;
+      currentFontIndex = index;
+      const preset = FONT_PRESETS[currentFontIndex];
+      document.documentElement.style.setProperty('--font-scale', preset.scale);
+      document.documentElement.setAttribute('data-font-preset', preset.id);
+      document.getElementById('fontStatusLabel').innerText = preset.label;
+    }
+
+    function increaseFontSize() { if (currentFontIndex < FONT_PRESETS.length - 1) applyFontPreset(currentFontIndex + 1); }
+    function decreaseFontSize() { if (currentFontIndex > 0) applyFontPreset(currentFontIndex - 1); }
+    function resetFontSize() { applyFontPreset(1); }
+
+    const DEFAULT_VIDEOS = {
+      procedure: "https://www.youtube.com/watch?v=F28MGLlpP90",
+      prep: "https://www.youtube.com/watch?v=kYJjZ3_7R4U",
+      sideeffects: "https://www.youtube.com/watch?v=F3P_7b7pL4w",
+      pain: "https://www.youtube.com/watch?v=yQ3D5oI69G8"
+    };
+
+    let videoUrls = { ...DEFAULT_VIDEOS };
+    let currentSession = {
+      id: Date.now(), fullName: '', age: '', gender: 'Perempuan', surgery: '', rmNumber: '',
+      checklist: { procedure: false, prep: false, sideeffects: false, pain: false },
+      apaisAnswers: [1, 1, 1, 1, 1, 1],
+      anxietyScore: 4,   // Item 1 + 2 + 4 + 5 (Rentang 4-20)
+      infoScore: 2,      // Item 3 + 6 (Rentang 2-10)
+      specificConcerns: '', timestamp: new Date().toISOString()
+    };
+
+    let allSessions = [];
+    try { allSessions = JSON.parse(localStorage.getItem('siap_operasi_sessions') || '[]'); } catch (e) { allSessions = []; }
+
+    function switchTab(tabId) {
+      ['profile', 'checklist', 'evaluation', 'infohub'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.add('hidden');
+        document.getElementById(`nav-${t}`).classList.remove('active');
+      });
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+      document.getElementById(`nav-${tabId}`).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function setSurgery(val) { document.getElementById('inputSurgery').value = val; }
+
+    function saveProfileAndNext() {
+      const name = document.getElementById('inputName').value.trim();
+      if (!name) { alert('Mohon isi nama lengkap pasien.'); return; }
+      currentSession.fullName = name;
+      currentSession.age = document.getElementById('inputAge').value.trim();
+      currentSession.gender = document.getElementById('inputGender').value;
+      currentSession.surgery = document.getElementById('inputSurgery').value.trim();
+      currentSession.rmNumber = document.getElementById('inputRM').value.trim();
+      switchTab('checklist');
+    }
+
+    function toggleCheck(key) {
+      currentSession.checklist[key] = document.getElementById(`check-${key}`).checked;
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const keys = Object.keys(currentSession.checklist);
+      const done = keys.filter(k => currentSession.checklist[k]).length;
+      const pct = Math.round((done / keys.length) * 100);
+      document.getElementById('progressText').innerText = `${done} dari ${keys.length} Domain Selesai`;
+      document.getElementById('progressPercent').innerText = `${pct}%`;
+    }
+
+    function calculateApais() {
+      let answers = [];
+      let anxietyTotal = 0;
+      let infoTotal = 0;
+
+      for (let i = 1; i <= 6; i++) {
+        const radios = document.getElementsByName(`apais${i}`);
+        let val = 1;
+        for (const r of radios) {
+          if (r.checked) { val = parseInt(r.value); break; }
+        }
+        answers.push(val);
+
+        // Subskala kecemasan: item 1, 2, 4, 5 (index 0, 1, 3, 4)
+        if (i === 1 || i === 2 || i === 4 || i === 5) {
+          anxietyTotal += val;
+        }
+        // Subskala kebutuhan informasi: item 3, 6 (index 2, 5)
+        if (i === 3 || i === 6) {
+          infoTotal += val;
+        }
+      }
+
+      currentSession.apaisAnswers = answers;
+      currentSession.anxietyScore = anxietyTotal;
+      currentSession.infoScore = infoTotal;
+
+      document.getElementById('apaisAnxietyScore').innerText = anxietyTotal;
+      document.getElementById('apaisInfoScore').innerText = infoTotal;
+    }
+
+    function saveEvaluationRecord() {
+      calculateApais();
+      currentSession.specificConcerns = document.getElementById('inputConcerns').value.trim();
+      currentSession.timestamp = new Date().toLocaleString('id-ID');
+      allSessions.push({ ...currentSession, id: Date.now() });
+      try { localStorage.setItem('siap_operasi_sessions', JSON.stringify(allSessions)); } catch (e) {}
+      updateSessionBadge();
+      alert('Hasil kuesioner APAIS pasien berhasil disimpan!');
+      switchTab('infohub');
+    }
+
+    function getYoutubeId(url) {
+      const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+      return match ? match[1] : null;
+    }
+
+    function playVideoByKey(key) {
+      const url = videoUrls[key] || DEFAULT_VIDEOS[key];
+      const videoId = getYoutubeId(url);
+      const titles = {
+        procedure: 'Video Prosedur Operasi & Anestesi',
+        prep: 'Video Persiapan Pra-Bedah & Puasa',
+        sideeffects: 'Video Antisipasi Efek Samping',
+        pain: 'Video Manajemen Nyeri & Relaksasi'
+      };
+      document.getElementById('videoModalTitle').innerText = titles[key] || 'Video Edukasi';
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0` : url;
+      document.getElementById('btnOpenInYoutube').onclick = () => window.open(url, '_blank');
+      document.getElementById('videoModal').classList.add('show');
+    }
+
+    function closeVideoModal() {
+      document.getElementById('videoIframe').src = '';
+      document.getElementById('videoModal').classList.remove('show');
+    }
+
+    function openVideoSettings() {
+      document.getElementById('customVideoProcedure').value = videoUrls.procedure;
+      document.getElementById('customVideoPrep').value = videoUrls.prep;
+      document.getElementById('customVideoSideeffects').value = videoUrls.sideeffects;
+      document.getElementById('customVideoPain').value = videoUrls.pain;
+      document.getElementById('videoSettingsModal').classList.add('show');
+    }
+
+    function closeVideoSettings() { document.getElementById('videoSettingsModal').classList.remove('show'); }
+
+    function saveCustomVideoUrls() {
+      videoUrls.procedure = document.getElementById('customVideoProcedure').value.trim() || DEFAULT_VIDEOS.procedure;
+      videoUrls.prep = document.getElementById('customVideoPrep').value.trim() || DEFAULT_VIDEOS.prep;
+      videoUrls.sideeffects = document.getElementById('customVideoSideeffects').value.trim() || DEFAULT_VIDEOS.sideeffects;
+      videoUrls.pain = document.getElementById('customVideoPain').value.trim() || DEFAULT_VIDEOS.pain;
+      try { localStorage.setItem('siap_operasi_videos', JSON.stringify(videoUrls)); } catch (e) {}
+      alert('Tautan video edukasi berhasil disimpan!');
+      closeVideoSettings();
+    }
+
+    function resetVideoUrls() {
+      videoUrls = { ...DEFAULT_VIDEOS };
+      try { localStorage.removeItem('siap_operasi_videos'); } catch (e) {}
+      openVideoSettings();
+      alert('Link video direset ke default.');
+    }
+
+    function openBreathingModal() { document.getElementById('breathingModal').classList.add('show'); }
+    function closeBreathingModal() { document.getElementById('breathingModal').classList.remove('show'); }
+    function openResearchModal() { renderRecords(); document.getElementById('researchModal').classList.add('show'); }
+    function closeResearchModal() { document.getElementById('researchModal').classList.remove('show'); }
+
+    function updateSessionBadge() {
+      const badge = document.getElementById('sessionBadge');
+      if (allSessions.length > 0) {
+        badge.innerText = allSessions.length;
+        badge.classList.remove('hidden');
+      } else { badge.classList.add('hidden'); }
+    }
+
+    function renderRecords() {
+      const countEl = document.getElementById('recordCount');
+      const listEl = document.getElementById('recordsList');
+      countEl.innerText = allSessions.length;
+      if (allSessions.length === 0) {
+        listEl.innerHTML = '<div class="section-subtitle" style="text-align: center; padding: 20px;">Belum ada data pasien tersimpan.</div>';
+        return;
+      }
+      listEl.innerHTML = allSessions.map(s => `
+        <div class="record-item">
+          <div style="display: flex; justify-content: space-between; font-weight: 700;">
+            <span>${s.fullName} (${s.age} th, ${s.gender})</span>
+            <span style="color: var(--teal);">Kecemasan (APAIS): ${s.anxietyScore} | Info: ${s.infoScore}</span>
+          </div>
+          <div style="color: var(--slate-600); margin-top: 3px;">${s.surgery} • RM: ${s.rmNumber || '-'}</div>
+        </div>
+      `).join('');
+    }
+
+    function exportCSV() {
+      if (allSessions.length === 0) { alert('Belum ada data untuk diekspor.'); return; }
+      const headers = ['ID', 'Nama Lengkap', 'Usia', 'Gender', 'Tindakan Operasi', 'No RM', 'Skor Kecemasan APAIS', 'Skor Info APAIS', 'Detail Jawaban (1-6)', 'Kekhawatiran', 'Waktu'];
+      const rows = allSessions.map(s => [s.id, `"${s.fullName}"`, s.age, s.gender, `"${s.surgery}"`, `"${s.rmNumber}"`, s.anxietyScore, s.infoScore, `"[${s.apaisAnswers.join(', ')}]"`, `"${(s.specificConcerns || '').replace(/"/g, '""')}"`, `"${s.timestamp}"`]);
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `Rekap_APAIS_SiapOperasi_${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function clearAllData() {
+      if (confirm('Hapus seluruh riwayat data APAIS pasien di perangkat ini?')) {
+        allSessions = [];
+        try { localStorage.removeItem('siap_operasi_sessions'); } catch (e) {}
+        renderRecords();
+        updateSessionBadge();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      updateSessionBadge();
+      applyFontPreset(1);
+      calculateApais();
+      try {
+        const savedVideos = localStorage.getItem('siap_operasi_videos');
+        if (savedVideos) videoUrls = { ...DEFAULT_VIDEOS, ...JSON.parse(savedVideos) };
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>

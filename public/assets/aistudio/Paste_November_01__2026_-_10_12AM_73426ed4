@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="id" data-font-preset="normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#00629b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Siap Operasi">
+  <title>Siap Operasi - Edukasi &amp; Checklist Pra-Bedah Anestesi</title>
+
+  <style>
+    :root {
+      --font-scale: 1;
+      --primary: #00629b;
+      --primary-light: #eef8ff;
+      --primary-dark: #004c7a;
+      --teal: #0d9488;
+      --teal-light: #f0fdfa;
+      --teal-dark: #0f766e;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #e2e8f0;
+      color: var(--slate-800);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 460px;
+      background: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .sticky-top-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    header {
+      padding: calc(10px + var(--sat)) 14px 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--teal-light);
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .brand-text h1 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-text p {
+      font-size: 10.5px;
+      color: var(--slate-600);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .badge-count {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: var(--teal);
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 10px;
+    }
+
+    .font-control-bar {
+      background: var(--primary-light);
+      border-top: 1px solid #dbeafe;
+      padding: 5px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .font-control-info {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .font-control-icon {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 12px;
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 3px 6px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .font-control-status {
+      font-size: 11.5px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .font-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .font-btn {
+      height: 30px;
+      padding: 0 9px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid #93c5fd;
+      background: #ffffff;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .font-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .font-btn-normal.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .font-btn-increase {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #ffffff;
+      padding: 0 10px;
+      font-size: 12.5px;
+      font-weight: 800;
+    }
+
+    /* PERBAIKAN UI: Jarak bawah ditambah agar tidak tertutup watermark Netlify / nav HP */
+    main {
+      flex: 1;
+      padding: 12px 14px calc(130px + var(--sab)) 14px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--teal-dark) 100%);
+      color: white;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 10px rgba(0, 98, 155, 0.16);
+    }
+
+    .hero-tag {
+      font-size: calc(10.5px * var(--font-scale));
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #99f6e4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .hero-banner h2 {
+      font-size: calc(16px * var(--font-scale));
+      font-weight: 800;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+
+    .hero-banner p {
+      font-size: calc(12px * var(--font-scale));
+      opacity: 0.95;
+      line-height: 1.45;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .card-gray {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: calc(13.5px * var(--font-scale));
+      font-weight: 700;
+      color: var(--slate-800);
+      line-height: 1.35;
+    }
+
+    .section-subtitle {
+      font-size: calc(11.5px * var(--font-scale));
+      color: var(--slate-600);
+      line-height: 1.4;
+    }
+
+    .body-copy {
+      font-size: calc(12.5px * var(--font-scale));
+      color: var(--slate-700);
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 11px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: calc(12px * var(--font-scale));
+      font-weight: 700;
+      color: var(--slate-800);
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 9px 12px;
+      font-size: max(16px, calc(15px * var(--font-scale)));
+      border: 1.5px solid var(--slate-300);
+      border-radius: 10px;
+      background: #ffffff;
+      color: var(--slate-900);
+      outline: none;
+      line-height: 1.35;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .chip-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
+    }
+
+    .chip-btn {
+      background: #ffffff;
+      border: 1px solid var(--slate-300);
+      color: var(--slate-800);
+      font-size: calc(11.5px * var(--font-scale));
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      width: 100%;
+      min-height: 44px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(0, 98, 155, 0.22);
+    }
+
+    .btn-teal {
+      background: var(--teal);
+      color: white;
+      border: none;
+      min-height: 44px;
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .btn-outline-teal {
+      background: var(--teal-light);
+      border: 1.5px solid #5eead4;
+      color: var(--teal-dark);
+      min-height: 40px;
+      font-size: calc(12.5px * var(--font-scale));
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .btn-outline-red {
+      background: #fef2f2;
+      border: 1.5px solid #fca5a5;
+      color: #b91c1c;
+      min-height: 40px;
+      font-size: calc(12.5px * var(--font-scale));
+      font-weight: 700;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .checklist-card {
+      background: white;
+      border: 1.5px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+
+    .checklist-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .checklist-checkbox {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      min-height: 20px;
+      accent-color: var(--teal);
+      cursor: pointer;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .category-badge {
+      font-size: calc(10px * var(--font-scale));
+      font-weight: 700;
+      text-transform: uppercase;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      padding: 2px 7px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .item-title {
+      font-size: calc(14px * var(--font-scale));
+      font-weight: 800;
+      color: var(--slate-900);
+      line-height: 1.3;
+    }
+
+    .item-desc {
+      font-size: calc(12.5px * var(--font-scale));
+      color: var(--slate-700);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .step-box {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: calc(12px * var(--font-scale));
+      color: var(--slate-800);
+      margin-bottom: 8px;
+      line-height: 1.55;
+    }
+
+    .step-box-title {
+      display: block;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 5px;
+      font-size: calc(12.5px * var(--font-scale));
+      line-height: 1.4;
+    }
+
+    .step-box-intro {
+      color: var(--slate-700);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .step-bullet {
+      margin-bottom: 5px;
+      line-height: 1.55;
+    }
+
+    .step-bullet:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-bullet strong {
+      display: inline;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .reassurance-box {
+      background: var(--primary-light);
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: calc(11.8px * var(--font-scale));
+      font-weight: 600;
+      color: var(--primary-dark);
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    .btn-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .progress-pct {
+      font-size: calc(16px * var(--font-scale));
+      font-weight: 800;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* APAIS Questionnaire Styles */
+    .apais-question-card {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .apais-question-title {
+      font-size: calc(12.5px * var(--font-scale));
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .apais-options {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+    }
+
+    .apais-option-label {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      padding: 6px 2px;
+      text-align: center;
+      cursor: pointer;
+      font-size: calc(11px * var(--font-scale));
+      font-weight: 600;
+      color: var(--slate-700);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .apais-option-label input {
+      accent-color: var(--primary);
+    }
+
+    .apais-score-summary {
+      background: var(--primary-light);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+
+    .score-box-item div:first-child {
+      font-size: calc(11px * var(--font-scale));
+      color: var(--slate-600);
+      font-weight: 600;
+    }
+
+    .score-box-item .score-val {
+      font-size: calc(18px * var(--font-scale));
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* PERBAIKAN UI NAV: z-index 999 agar selalu di atas watermark Netlify */
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 460px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-top: 1px solid var(--slate-200);
+      display: flex;
+      justify-content: space-around;
+      padding-top: 8px;
+      padding-bottom: calc(12px + var(--sab));
+      z-index: 999;
+    }
+
+    .nav-item {
+      background: none;
+      border: none;
+      flex: 1;
+      min-height: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: var(--slate-600);
+      cursor: pointer;
+      font-size: min(14px, calc(11.5px * var(--font-scale)));
+      font-weight: 600;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .nav-item svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.show { display: flex; }
+
+    .modal-content {
+      background: white;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 420px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 20px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--slate-200);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .modal-title {
+      font-size: calc(16px * var(--font-scale));
+      font-weight: 800;
+      color: var(--slate-900);
+    }
+
+    .modal-close {
+      background: var(--slate-100);
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: var(--slate-700);
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    @keyframes breathPulse {
+      0%, 100% { transform: scale(1); opacity: 0.88; }
+      50% { transform: scale(1.28); opacity: 1; }
+    }
+
+    .breathing-box {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--primary) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 28px auto;
+      animation: breathPulse 12s infinite ease-in-out;
+      font-size: calc(13px * var(--font-scale));
+      font-weight: 700;
+      padding: 14px;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+
+    .emergency-box {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      padding: 12px;
+      border-radius: 12px;
+      font-size: calc(13px * var(--font-scale));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .record-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-size: calc(12.5px * var(--font-scale));
+    }
+
+    .status-alert {
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+      display: none;
+    }
+    .status-alert.success { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+    .status-alert.loading { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <div class="sticky-top-wrapper">
+      <header>
+        <div class="brand-group">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h1>Siap Operasi</h1>
+            <p>Checklist Edukasi Pra-Bedah (Dawod et al., 2024)</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" onclick="openQrModal()" title="QR Code Akses" style="background: var(--teal-light); border-color: #99f6e4; color: var(--teal);">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm8-12v8h8V3h-8zm6 6h-4V5h4v4zm-6 4h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm4 0h2v4h-2v-4zm2-2h2v2h-2v-2zm0-2h2v2h-2v-2zm-2 0h2v2h-2v-2z"/>
+            </svg>
+          </button>
+          <button class="icon-btn" onclick="openVideoSettings()" title="Pengaturan Video">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/>
+            </svg>
+          </button>
+          <button class="icon-btn" onclick="openResearchModal()" title="Rekap Data Riset">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM10 13l3.5-3.5 1.41 1.41L11.41 14.4l-1.41-1.4z"/>
+            </svg>
+            <span id="sessionBadge" class="badge-count hidden">0</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="font-control-bar">
+        <div class="font-control-info">
+          <span class="font-control-icon">Aa</span>
+          <span class="font-control-status" id="fontStatusLabel">Ukuran Huruf: Normal (100%)</span>
+        </div>
+        <div class="font-btn-group">
+          <button type="button" id="btnFontDecrease" class="font-btn" onclick="decreaseFontSize()">A-</button>
+          <button type="button" id="btnFontNormal" class="font-btn font-btn-normal active" onclick="resetFontSize()">Normal</button>
+          <button type="button" id="btnFontIncrease" class="font-btn font-btn-increase" onclick="increaseFontSize()">A+</button>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <!-- TAB 1: PROFIL -->
+      <section id="tab-profile">
+        <div class="hero-banner">
+          <div class="hero-tag"><span>Tahap 1: Registrasi Pra-Bedah</span><span>★</span></div>
+          <h2>Identitas Pasien</h2>
+          <p>Lengkapi data diri pasien sebelum memulai checklist edukasi persiapan anestesi.</p>
+        </div>
+
+        <div class="card-gray">
+          <div class="form-group">
+            <label for="inputName">Nama Lengkap Pasien *</label>
+            <input type="text" id="inputName" class="form-control" placeholder="Contoh: Ny. Siti Rahmawati">
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="inputAge">Usia (Tahun) *</label>
+              <input type="number" id="inputAge" class="form-control" placeholder="Contoh: 62">
+            </div>
+            <div class="form-group">
+              <label for="inputGender">Jenis Kelamin *</label>
+              <select id="inputGender" class="form-control">
+                <option value="Perempuan">Perempuan</option>
+                <option value="Laki-laki">Laki-laki</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputSurgery">Rencana Tindakan Operasi *</label>
+            <input type="text" id="inputSurgery" class="form-control" placeholder="Contoh: Seksio Sesarea (SC)">
+            <div class="chip-container">
+              <button type="button" class="chip-btn" onclick="setSurgery('Apendiktomi')">+ Apendiktomi</button>
+              <button type="button" class="chip-btn" onclick="setSurgery('Seksio Sesarea (SC)')">+ Seksio Sesarea</button>
+              <button type="button" class="chip-btn" onclick="setSurgery('ORIF Fraktur')">+ ORIF Fraktur</button>
+              <button type="button" class="chip-btn" onclick="setSurgery('Laparoskopi')">+ Laparoskopi</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputRM">No. Rekam Medis (RM) / Kamar</label>
+            <input type="text" id="inputRM" class="form-control" placeholder="Contoh: RM-98231 / Kamar Melati 3">
+          </div>
+
+          <button type="button" class="btn-primary" onclick="saveProfileAndNext()" style="margin-top: 10px;">
+            <span>Simpan &amp; Lanjut ke Edukasi</span><span>➔</span>
+          </button>
+
+          <button type="button" id="btnResetPatient" class="btn-outline-teal hidden" onclick="startNewPatientSession()" style="width: 100%; margin-top: 8px;">
+            <span>🔄</span><span>Mulai Sesi Pasien Baru</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- TAB 2: CHECKLIST EDUKASI -->
+      <section id="tab-checklist" class="hidden">
+        <div class="hero-banner" style="background: linear-gradient(135deg, var(--teal) 0%, var(--primary) 100%);">
+          <div class="hero-tag"><span>Dawod et al. (2024) Protocol</span><span>✓</span></div>
+          <h2>Checklist Edukasi Pra-Bedah</h2>
+          <p>4 Domain Konseling Utama untuk memastikan kesiapan dan menurunkan kecemasan.</p>
+        </div>
+
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px;">
+          <div>
+            <div class="section-title">Kemajuan Edukasi Pasien</div>
+            <div class="section-subtitle" id="progressText">0 dari 4 Domain Selesai</div>
+          </div>
+          <div class="progress-pct" id="progressPercent">0%</div>
+        </div>
+
+        <!-- Domain 1 -->
+        <div class="checklist-card">
+          <label class="checklist-header">
+            <input type="checkbox" id="check-procedure" class="checklist-checkbox" onchange="toggleCheck('procedure')">
+            <div>
+              <span class="category-badge">Domain 1: Prosedur &amp; Anestesi</span>
+              <div class="item-title">Prosedur Operasi &amp; Cara Kerja Pembiusan</div>
+            </div>
+          </label>
+          <div class="item-desc">Memahami urutan kegiatan sejak masuk ruang operasi hingga bangun kembali akan membantu pikiran jauh lebih tenang. Selama tindakan berlangsung, dokter spesialis anestesi dan perawat anestesi selalu mendampingi Anda setiap detik.</div>
+          <div class="step-box">
+            <span class="step-box-title">1. Alur Tahapan Anda di Kamar Operasi:</span>
+            <div class="step-bullet">• <strong>Ruang Penerimaan (Sign-In):</strong> Perawat mencocokkan gelang identitas, rencana lokasi operasi, riwayat alergi obat, serta memastikan waktu puasa Anda sudah aman.</div>
+            <div class="step-bullet">• <strong>Pemasangan Alat Pantau:</strong> Di ruang operasi yang sejuk, petugas memasang manset tensi di lengan, stiker rekam jantung di dada, dan penjepit sensor oksigen di ujung jari (sama sekali tidak terasa sakit).</div>
+            <div class="step-bullet">• <strong>Pemberian Obat Bius:</strong> Dokter anestesi mulai memberikan obat bius sesuai kondisi medis Anda hingga Anda benar-benar bebas nyeri sebelum operasi dimulai.</div>
+            <div class="step-bullet">• <strong>Ruang Pemulihan (Recovery Room):</strong> Seusai tindakan, Anda dipantau ketat selama 1 sampai 2 jam hingga kesadaran, napas, dan tekanan darah stabil sebelum kembali ke kamar rawat.</div>
+          </div>
+          <div class="step-box">
+            <span class="step-box-title">2. Jenis Pembiusan yang Perlu Dipahami:</span>
+            <div class="step-bullet">• <strong>Bius Umum (Bius Tidur):</strong> Obat diberikan lewat selang infus atau masker oksigen sehingga Anda tertidur pulas dalam hitungan detik. Selama operasi berlangsung, Anda tidak merasakan nyeri, tidak mendengar suara alat, dan tidak mengingat jalannya tindakan.</div>
+            <div class="step-bullet">• <strong>Bius Regional / Spinal (Setengah Badan):</strong> Suntikan halus di punggung bawah membuat saraf perut hingga kaki kebas total dari rasa sakit, sementara Anda tetap bernapas lega dan rileks.</div>
+          </div>
+          <div class="reassurance-box">
+            ℹ️ Pesan Tenang: Dosis obat bius diatur secara presisi mengikuti tanda vital tubuh Anda sepanjang waktu, sehingga Anda tidak akan terbangun kesakitan di tengah operasi.
+          </div>
+        </div>
+
+        <!-- Domain 2 -->
+        <div class="checklist-card">
+          <label class="checklist-header">
+            <input type="checkbox" id="check-prep" class="checklist-checkbox" onchange="toggleCheck('prep')">
+            <div>
+              <span class="category-badge">Domain 2: Persiapan Pra-Bedah</span>
+              <div class="item-title">Persiapan Fisik &amp; Aturan Puasa Aman</div>
+            </div>
+          </label>
+          <div class="item-desc">Persiapan tubuh dan kepatuhan jadwal puasa sebelum operasi sangat penting untuk melindungi paru-paru Anda saat pembiusan serta menjaga kesterilan area pembedahan.</div>
+          <div class="step-box">
+            <span class="step-box-title">1. Mengapa Harus Puasa &amp; Berapa Lama?</span>
+            <div class="step-box-intro">Saat obat bius bekerja, otot lambung dan refleks menelan ikut rileks. Jika lambung masih terisi makanan, isi lambung dapat naik ke kerongkongan dan masuk ke paru-paru (aspirasi). Patuhi batas waktu berikut:</div>
+            <div class="step-bullet">• <strong>Makanan Berat / Berlemak (Stop 8 Jam):</strong> Hentikan nasi, lauk bersantan, gorengan, daging, atau susu minimal 8 jam sebelum jadwal bius karena paling lambat dicerna lambung.</div>
+            <div class="step-bullet">• <strong>Makanan Ringan / Bubur (Stop 6 Jam):</strong> Hentikan roti tawar, biskuit, atau bubur halus minimal 6 jam sebelum tindakan.</div>
+            <div class="step-bullet">• <strong>Air Putih Jernih (Hingga 2 Jam Sebelum Bius):</strong> Air putih bening (tanpa gula/susu) masih boleh diminum secukupnya hingga 2 jam sebelum operasi agar tenggorokan tidak kering, kecuali ada instruksi khusus dokter.</div>
+          </div>
+          <div class="step-box">
+            <span class="step-box-title">2. Kebersihan Tubuh, Aksesoris &amp; Obat Rutin:</span>
+            <div class="step-bullet">• <strong>Mandi &amp; Gaun Khusus Operasi:</strong> Mandi bersih untuk mengurangi kuman kulit, lalu ganti seluruh pakaian (termasuk pakaian dalam) menggunakan baju steril rumah sakit.</div>
+            <div class="step-bullet">• <strong>Lepas Logam &amp; Gigi Palsu:</strong> Lepaskan cincin, kalung, anting, jam tangan, kacamata, lensa kontak, serta gigi palsu lepasan agar jalan napas tetap aman.</div>
+            <div class="step-bullet">• <strong>Bersihkan Cat Kuku &amp; Riasan:</strong> Hapus kuteks dan lipstik tebal karena tim medis perlu melihat warna alami kuku/bibir serta membaca kadar oksigen darah lewat sensor jari.</div>
+            <div class="step-bullet">• <strong>Obat Rutin Harian:</strong> Sampaikan kepada dokter atau perawat bila Anda rutin minum obat tensi, jantung, gula (diabetes), atau pengencer darah. Obat tertentu tetap perlu diminum dengan seteguk air putih sesuai arahan dokter.</div>
+          </div>
+          <div class="reassurance-box">
+            ℹ️ Penting Demi Keselamatan: Bila tidak sengaja terminum atau termakan sesuatu mendekati jam operasi, segera jujur memberi tahu perawat agar jadwal bius disesuaikan dengan aman.
+          </div>
+        </div>
+
+        <!-- Domain 3 -->
+        <div class="checklist-card">
+          <label class="checklist-header">
+            <input type="checkbox" id="check-sideeffects" class="checklist-checkbox" onchange="toggleCheck('sideeffects')">
+            <div>
+              <span class="category-badge">Domain 3: Antisipasi Efek Samping</span>
+              <div class="item-title">Mengenali Sensasi Wajar Pasca-Bius &amp; Penanganannya</div>
+            </div>
+          </label>
+          <div class="item-desc">Ketika efek obat bius mulai berkurang di ruang pemulihan, tubuh dapat merasakan beberapa sensasi sementara. Mengetahui mana reaksi yang wajar akan mencegah rasa panik saat baru terbangun.</div>
+          <div class="step-box">
+            <span class="step-box-title">1. Sensasi Sementara yang Wajar &amp; Cara Mengatasinya:</span>
+            <div class="step-bullet">• <strong>Mengantuk Berat &amp; Pusing Ringan:</strong> Sisa obat bius membuat kepala terasa berat seperti baru bangun tidur lelap. Tetap berbaring tenang, jangan langsung duduk mendadak, dan pastikan pagar pengaman tempat tidur terpasang.</div>
+            <div class="step-bullet">• <strong>Rasa Dingin / Menggigil (Shivering):</strong> Suhu kamar operasi yang sejuk dan respons obat bius sering memicu rasa menggigil tanpa demam. Perawat akan segera memasangkan selimut penghangat khusus hingga tubuh nyaman.</div>
+            <div class="step-bullet">• <strong>Mual atau Ingin Muntah (PONV):</strong> Jika perut terasa mual, miringkan kepala ke samping, tarik napas perlahan lewat hidung, dan beritahu perawat agar segera diberikan obat antimual melalui selang infus.</div>
+            <div class="step-bullet">• <strong>Tenggorokan Kering / Sedikit Serak:</strong> Wajar terjadi sementara setelah pemasangan alat bantu napas pada bius umum dan berangsur membaik dalam 1 sampai 2 hari setelah diizinkan minum bertahap.</div>
+            <div class="step-bullet">• <strong>Kebas / Kesemutan Berkurang (Pasca Bius Spinal):</strong> Kedua kaki akan terasa berat selama 2 sampai 4 jam pertama. Gerakkan jari kaki perlahan saat rasa kebas mulai berkurang sesuai arahan perawat.</div>
+          </div>
+          <div class="step-box">
+            <span class="step-box-title">2. Kapan Harus Segera Menekan Bel Perawat?</span>
+            <div class="step-bullet">• <strong>Tanda Lapor Segera:</strong> Segera panggil perawat bila muncul sesak napas, jantung berdebar kencang, muntah berulang, pusing berputar hebat, atau balutan perban operasi tampak merembes darah segar.</div>
+          </div>
+          <div class="reassurance-box">
+            ℹ️ Tip Keselamatan Pasien: Jangan turun dari tempat tidur atau berjalan ke kamar mandi sendirian pada 6 sampai 12 jam pertama setelah operasi. Selalu minta pendampingan perawat atau keluarga.
+          </div>
+        </div>
+
+        <!-- Domain 4 -->
+        <div class="checklist-card">
+          <label class="checklist-header">
+            <input type="checkbox" id="check-pain" class="checklist-checkbox" onchange="toggleCheck('pain')">
+            <div>
+              <span class="category-badge">Domain 4: Nyeri &amp; Relaksasi</span>
+              <div class="item-title">Manajemen Nyeri &amp; Relaksasi Napas Dalam</div>
+            </div>
+          </label>
+          <div class="item-desc">Rasa nyeri setelah operasi dapat dikendalikan secara efektif melalui kombinasi obat antinyeri terjadwal dari tim medis dan latihan relaksasi napas dalam mandiri untuk menenangkan saraf.</div>
+          <div class="step-box" style="margin-bottom: 0;">
+            <span class="step-box-title">Langkah Relaksasi Napas Dalam (Pola 4-2-6):</span>
+            <div class="step-bullet">• <strong>1. Posisi Nyaman:</strong> Rilekskan bahu di atas bantal. Bila luka operasi di perut/dada, sangga lembut area tersebut dengan bantal kecil saat bernapas.</div>
+            <div class="step-bullet">• <strong>2. Tarik Napas (4 Detik):</strong> Hirup udara perlahan dan dalam melalui hidung selama 4 hitungan sambil merasakan udara masuk dengan tenang.</div>
+            <div class="step-bullet">• <strong>3. Tahan Sejenak (2 Detik):</strong> Tahan napas dengan rileks selama 2 hitungan tanpa mengejan.</div>
+            <div class="step-bullet">• <strong>4. Hembuskan Perlahan (6 Detik):</strong> Keluarkan udara perlahan lewat bibir sedikit mengerucut (seperti meniup lilin pelan) selama 6 hitungan. Ulangi 5 sampai 10 siklus.</div>
+            <div class="step-bullet">• <strong>5. Laporkan Skala Nyeri (0 sampai 10):</strong> Jangan menahan nyeri sendirian. Sebutkan angka nyeri Anda (0 = tidak nyeri hingga 10 = sangat nyeri) kepada perawat.</div>
+          </div>
+          <div class="btn-stack">
+            <button type="button" class="btn-outline-red" style="width: 100%; min-height: 46px;" onclick="playVideoByKey('pain')">
+              <span>▶</span> <span>Tonton Video Relaksasi Napas Dalam</span>
+            </button>
+            <button type="button" class="btn-outline-teal" style="width: 100%; min-height: 46px;" onclick="openBreathingModal()">
+              <span>🌬️</span> <span>Panduan Latihan Napas Dalam Interaktif</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" onclick="switchTab('evaluation')" style="margin-top: 10px;">
+          <span>Lanjut ke Evaluasi Kuesioner APAIS</span><span>➔</span>
+        </button>
+      </section>
+
+      <!-- TAB 3: EVALUASI KUESIONER APAIS -->
+      <section id="tab-evaluation" class="hidden">
+        <div class="hero-banner" style="background: linear-gradient(135deg, #4f46e5 0%, var(--primary) 100%);">
+          <div class="hero-tag"><span>Instrumen Baku Skripsi</span><span>📊</span></div>
+          <h2>Kuesioner APAIS Versi Indonesia</h2>
+          <p>Amsterdam Preoperative Anxiety and Information Scale (Perdana et al., 2020). Berikan penilaian skala 1 sampai 5.</p>
+        </div>
+
+        <div class="apais-score-summary">
+          <div class="score-box-item">
+            <div>Skor Kecemasan</div>
+            <div class="score-val" id="apaisAnxietyScore">4</div>
+            <div style="font-size: 9.5px; color: var(--slate-500);">(Rentang: 4 - 20)</div>
+          </div>
+          <div class="score-box-item">
+            <div>Kebutuhan Informasi</div>
+            <div class="score-val" id="apaisInfoScore">2</div>
+            <div style="font-size: 9.5px; color: var(--slate-500);">(Rentang: 2 - 10)</div>
+          </div>
+        </div>
+
+        <div class="card-gray" style="padding: 10px;">
+          <div class="section-subtitle" style="margin-bottom: 10px; font-weight: bold; color: var(--slate-900);">
+            Keterangan Skala Likert: 1 = Sama sekali tidak, 2 = Tidak terlalu, 3 = Sedikit, 4 = Agak, 5 = Sangat
+          </div>
+
+          <!-- APAIS Item 1 -->
+          <div class="apais-question-card">
+            <div class="apais-question-title">1. Saya takut dibius (Anestesi)</div>
+            <div class="apais-options">
+              <label class="apais-option-label"><input type="radio" name="apais1" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais1" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais1" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais1" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais1" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 2 -->
+          <div class="apais-question-card">
+            <div class="apais-question-title">2. Saya terus-menerus memikirkan tentang pembiusan</div>
+            <div class="apais-options">
+              <label class="apais-option-label"><input type="radio" name="apais2" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais2" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais2" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais2" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais2" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 3 -->
+          <div class="apais-question-card" style="border-color: #99f6e4; background: #f0fdfa;">
+            <div class="apais-question-title">3. Saya ingin tahu sebanyak mungkin tentang pembiusan</div>
+            <div class="apais-options">
+              <label class="apais-option-label"><input type="radio" name="apais3" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais3" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais3" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais3" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais3" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 4 -->
+          <div class="apais-question-card">
+            <div class="apais-question-title">4. Saya takut dioperasi (Pembedahan)</div>
+            <div class="apais-options">
+              <label class="apais-option-label"><input type="radio" name="apais4" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais4" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais4" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais4" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais4" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 5 -->
+          <div class="apais-question-card">
+            <div class="apais-question-title">5. Saya terus memikirkan tentang operasi</div>
+            <div class="apais-options">
+              <label class="apais-option-label"><input type="radio" name="apais5" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais5" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais5" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais5" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais5" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <!-- APAIS Item 6 -->
+          <div class="apais-question-card" style="border-color: #99f6e4; background: #f0fdfa;">
+            <div class="apais-question-title">6. Saya ingin tahu sebanyak mungkin tentang operasi</div>
+            <div class="apais-options">
+              <label class="apais-option-label"><input type="radio" name="apais6" value="1" checked onchange="calculateApais()">1<span>Sama sekali</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais6" value="2" onchange="calculateApais()">2<span>Tidak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais6" value="3" onchange="calculateApais()">3<span>Sedikit</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais6" value="4" onchange="calculateApais()">4<span>Agak</span></label>
+              <label class="apais-option-label"><input type="radio" name="apais6" value="5" onchange="calculateApais()">5<span>Sangat</span></label>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 12px;">
+            <label for="inputConcerns">Catatan / Kekhawatiran Khusus Pasien</label>
+            <textarea id="inputConcerns" class="form-control" rows="2" placeholder="Tuliskan keluhan atau hal lain yang dikhawatirkan pasien"></textarea>
+          </div>
+
+          <!-- Tombol Simpan & Kirim Otomatis ke Google Sheets Anda -->
+          <button type="button" class="btn-teal" onclick="saveToGoogleSheetsOnly()" style="margin-top: 10px;">
+            <span>💾</span><span>Simpan &amp; Otomatis Kirim Data (Google Sheets)</span>
+          </button>
+
+          <div id="statusAlert" class="status-alert"></div>
+        </div>
+      </section>
+
+      <!-- TAB 4: INFO HUB -->
+      <section id="tab-infohub" class="hidden">
+        <div class="hero-banner" style="background: linear-gradient(135deg, var(--slate-800) 0%, var(--slate-900) 100%);">
+          <div class="hero-tag"><span>Pusat Informasi &amp; Bantuan</span><span>ℹ</span></div>
+          <h2>Informasi &amp; Kontak Tim Medis</h2>
+          <p>QR akses cepat browser, panduan puasa kamar operasi, dan kontak perawat.</p>
+        </div>
+
+        <button type="button" class="card" onclick="openQrModal()" style="width: 100%; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left; background: #f0fdfa; border-color: #99f6e4;">
+          <div>
+            <div class="section-title" style="color: #0f766e;">📱 QR Code Akses Cepat (Netlify)</div>
+            <div class="section-subtitle" style="color: var(--slate-700);">Scan kamera HP pasien untuk membuka aplikasi langsung</div>
+          </div>
+          <span style="font-size: 20px; color: var(--teal); font-weight: bold;">➔</span>
+        </button>
+
+        <button type="button" class="card" onclick="openVideoSettings()" style="width: 100%; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left;">
+          <div>
+            <div class="section-title">Atur Link Video YouTube Sendiri</div>
+            <div class="section-subtitle">🔒 Ubah URL YouTube Relaksasi Napas Dalam (Khusus Petugas)</div>
+          </div>
+          <span style="font-size: 20px; color: var(--primary); font-weight: bold;">➔</span>
+        </button>
+
+        <div class="card">
+          <div class="section-title" style="margin-bottom: 8px;">🍽️ Aturan Puasa Pre-Operasi (ASA / ERAS)</div>
+          <div class="body-copy">
+            • Makanan Berat / Lemak: Stop 8 Jam sebelum operasi.<br>
+            • Makanan Ringan / Bubur: Stop 6 Jam sebelum operasi.<br>
+            • Air Putih Jernih: Maksimal 2 Jam sebelum bius.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-title" style="margin-bottom: 8px;">🚨 Kontak Darurat Ruang Perawatan</div>
+          <div class="body-copy" style="margin-bottom: 10px;">Jika mengalami keluhan nyeri hebat atau mual mendadak:</div>
+          <div class="emergency-box">
+            <span>Pos Perawat (Nurse Station):</span>
+            <strong style="color: var(--primary);">Ext. 119 / Bel Pasien</strong>
+          </div>
+        </div>
+
+        <button type="button" class="card" onclick="openResearchModal()" style="width: 100%; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left;">
+          <div>
+            <div class="section-title">Rekap Data Riset APAIS &amp; Ekspor CSV</div>
+            <div class="section-subtitle">🔒 Lihat skor APAIS &amp; ekspor CSV (Khusus Petugas)</div>
+          </div>
+          <span style="font-size: 20px; color: var(--teal); font-weight: bold;">➔</span>
+        </button>
+      </section>
+    </main>
+
+    <nav>
+      <button type="button" class="nav-item active" id="nav-profile" onclick="switchTab('profile')">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <span>Profil</span>
+      </button>
+      <button type="button" class="nav-item" id="nav-checklist" onclick="switchTab('checklist')">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <span>Checklist</span>
+      </button>
+      <button type="button" class="nav-item" id="nav-evaluation" onclick="switchTab('evaluation')">
+        <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+        <span>Evaluasi</span>
+      </button>
+      <button type="button" class="nav-item" id="nav-infohub" onclick="switchTab('infohub')">
+        <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+        <span>Info Hub</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- MODAL: VIDEO PLAYER -->
+  <div id="videoModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="videoModalTitle">Video Edukasi</div>
+        <button type="button" class="modal-close" onclick="closeVideoModal()">✕</button>
+      </div>
+      <div class="video-container">
+        <iframe id="videoIframe" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <button type="button" class="btn-primary" id="btnOpenInYoutube" style="margin-bottom: 8px;">Buka di Aplikasi YouTube</button>
+      <div class="btn-row">
+        <button type="button" class="btn-outline-teal" onclick="markVideoCompleted()" style="flex: 1.35;">✓ Tandai Selesai</button>
+        <button type="button" class="btn-outline-red" onclick="closeVideoModal()" style="flex: 1; background: var(--slate-50); border-color: var(--slate-300); color: var(--slate-700);">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PENGATURAN VIDEO YOUTUBE -->
+  <div id="videoSettingsModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Kustomisasi Link Video YouTube</div>
+        <button type="button" class="modal-close" onclick="closeVideoSettings()">✕</button>
+      </div>
+      <div class="form-group">
+        <label for="customVideoPain">Domain 4: Video Relaksasi Napas Dalam</label>
+        <input type="url" id="customVideoPain" class="form-control">
+      </div>
+      <div class="btn-row" style="margin-top: 14px;">
+        <button type="button" class="btn-outline-teal" onclick="resetVideoUrls()">Reset Default</button>
+        <button type="button" class="btn-primary" onclick="saveCustomVideoUrls()" style="flex: 2;">Simpan Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LATIHAN NAFAS -->
+  <div id="breathingModal" class="modal-backdrop">
+    <div class="modal-content" style="text-align: center;">
+      <div class="modal-header">
+        <div class="modal-title">Latihan Napas Dalam Terpandu</div>
+        <button type="button" class="modal-close" onclick="closeBreathingModal()">✕</button>
+      </div>
+      <div class="breathing-box">Tarik Napas (4s)<br>Tahan (2s)<br>Hembuskan (6s)</div>
+      <button type="button" class="btn-primary" onclick="completeBreathingExercise()">✓ Selesai &amp; Tandai Checklist</button>
+    </div>
+  </div>
+
+  <!-- MODAL: REKAP DATA RISET -->
+  <div id="researchModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Rekap Data Riset APAIS</div>
+        <button type="button" class="modal-close" onclick="closeResearchModal()">✕</button>
+      </div>
+      <div class="btn-row" style="margin-bottom: 12px;">
+        <button type="button" class="btn-outline-teal" onclick="exportCSV()">📥 Ekspor CSV/Excel</button>
+        <button type="button" class="btn-outline-red" onclick="clearAllData()">Hapus Semua</button>
+      </div>
+      <div class="section-title" style="margin-bottom: 8px;">Total Pasien: <span id="recordCount">0</span></div>
+      <div id="recordsList" style="max-height: 260px; overflow-y: auto; margin-bottom: 12px;"></div>
+      <button type="button" class="btn-primary" onclick="closeResearchModal()">Tutup</button>
+    </div>
+  </div>
+
+  <!-- MODAL: PASSWORD PETUGAS -->
+  <div id="passwordModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">🔒 Akses Khusus Petugas</div>
+        <button type="button" class="modal-close" onclick="closePasswordModal()">✕</button>
+      </div>
+      <p class="section-subtitle" id="passwordModalSubtitle" style="margin-bottom: 14px;">Masukkan password petugas/peneliti untuk membuka menu ini.</p>
+      <div class="form-group">
+        <label for="staffPasswordInput">Password Petugas</label>
+        <input type="password" id="staffPasswordInput" class="form-control" inputmode="numeric" placeholder="Masukkan password" oninput="hideStaffPasswordError()" onkeydown="if(event.key==='Enter'){event.preventDefault();submitStaffPassword();}">
+      </div>
+      <div id="staffPasswordError" class="hidden" style="background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 10px 12px; border-radius: 10px; font-size: calc(12px * var(--font-scale)); font-weight: 600; margin-top: 8px;">Password salah.</div>
+      <div class="btn-row" style="margin-top: 16px;">
+        <button type="button" class="btn-outline-teal" onclick="closePasswordModal()" style="flex: 1;">Batal</button>
+        <button type="button" class="btn-primary" onclick="submitStaffPassword()" style="flex: 1.4;">Buka Akses</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: QR CODE AKSES CEPAT -->
+  <div id="qrAccessModal" class="modal-backdrop">
+    <div class="modal-content" style="text-align: center;">
+      <div class="modal-header">
+        <div style="text-align: left;">
+          <div class="modal-title">QR Code Akses Aplikasi</div>
+        </div>
+        <button type="button" class="modal-close" onclick="closeQrModal()">✕</button>
+      </div>
+      <div style="display: flex; justify-content: center; margin: 6px 0 12px;">
+        <div style="background: #ffffff; border: 1.5px solid var(--slate-300); border-radius: 18px; padding: 10px;">
+          <canvas id="qrCanvas" width="240" height="240" style="width: 216px; height: 216px; display: block;"></canvas>
+        </div>
+      </div>
+      <div id="qrActiveUrlText" style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 10px; padding: 8px 10px; font-family: monospace; font-size: calc(11px * var(--font-scale)); font-weight: 600; color: var(--primary-dark); word-break: break-all; margin-bottom: 12px;"></div>
+      <button type="button" class="btn-teal" onclick="downloadQrPosterPng()" style="margin-bottom: 8px;">📥 Unduh Kartu QR Siap Cetak (PNG)</button>
+      <div class="btn-row" style="margin-bottom: 8px;">
+        <button type="button" class="btn-outline-teal" onclick="copyQrUrl()" style="flex: 1;">📋 Salin Link</button>
+        <button type="button" class="btn-primary" onclick="openQrTargetInBrowser()" style="flex: 1.25;">🌐 Buka di Browser</button>
+      </div>
+      <button type="button" class="btn-outline-teal" onclick="openQrUrlSettings()" style="width: 100%; background: var(--slate-50); border-color: var(--slate-200); color: var(--slate-700);">🔒 Ubah Link Netlify QR</button>
+    </div>
+  </div>
+
+  <!-- MODAL: PENGATURAN QR -->
+  <div id="qrUrlSettingsModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Atur Link Netlify QR Code</div>
+        <button type="button" class="modal-close" onclick="closeQrUrlSettings()">✕</button>
+      </div>
+      <div class="form-group">
+        <label for="customQrWebUrlInput">Alamat Link Netlify Anda</label>
+        <input type="text" id="customQrWebUrlInput" class="form-control" placeholder="https://resplendent-zuccutto-9a64ae.netlify.app" oninput="updateQrSettingsLivePreview()">
+      </div>
+      <div class="btn-row" style="margin-top: 14px;">
+        <button type="button" class="btn-outline-teal" onclick="resetQrWebUrl()">Reset Default</button>
+        <button type="button" class="btn-primary" onclick="saveCustomQrWebUrl()" style="flex: 1.4;">Simpan Link</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // URL Google Apps Script yang terhubung ke Google Sheets Anda
+    const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx.../exec"; // Masukkan URL Web App Google Sheets Anda di sini
+
+    const FONT_PRESETS = [
+      { id: 'small',  scale: 0.90, label: 'Ukuran Huruf: Kecil (90%)' },
+      { id: 'normal', scale: 1.00, label: 'Ukuran Huruf: Normal (100%)' },
+      { id: 'large',  scale: 1.15, label: 'Ukuran Huruf: Besar (115%)' },
+      { id: 'xlarge', scale: 1.30, label: 'Ukuran Huruf: Sangat Besar (130%)' }
+    ];
+
+    let currentFontIndex = 1;
+
+    function applyFontPreset(index) {
+      if (index < 0 || index >= FONT_PRESETS.length) return;
+      currentFontIndex = index;
+      const preset = FONT_PRESETS[currentFontIndex];
+      document.documentElement.style.setProperty('--font-scale', preset.scale);
+      document.documentElement.setAttribute('data-font-preset', preset.id);
+      document.getElementById('fontStatusLabel').innerText = preset.label;
+    }
+
+    function increaseFontSize() { if (currentFontIndex < FONT_PRESETS.length - 1) applyFontPreset(currentFontIndex + 1); }
+    function decreaseFontSize() { if (currentFontIndex > 0) applyFontPreset(currentFontIndex - 1); }
+    function resetFontSize() { applyFontPreset(1); }
+
+    const VIDEO_STORAGE_KEY = 'siap_operasi_video_relaxation_v2';
+    const DEFAULT_VIDEOS = { pain: "https://www.youtube.com/watch?v=TPIEEQtAUjg" };
+    let videoUrls = { ...DEFAULT_VIDEOS };
+
+    let currentSession = {
+      id: Date.now(), fullName: '', age: '', gender: 'Perempuan', surgery: '', rmNumber: '',
+      checklist: { procedure: false, prep: false, sideeffects: false, pain: false },
+      apaisAnswers: [1, 1, 1, 1, 1, 1],
+      anxietyScore: 4, infoScore: 2, specificConcerns: '', timestamp: new Date().toISOString()
+    };
+
+    let allSessions = [];
+    try { allSessions = JSON.parse(localStorage.getItem('siap_operasi_sessions') || '[]'); } catch (e) { allSessions = []; }
+
+    function switchTab(tabId) {
+      ['profile', 'checklist', 'evaluation', 'infohub'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.add('hidden');
+        document.getElementById(`nav-${t}`).classList.remove('active');
+      });
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+      document.getElementById(`nav-${tabId}`).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function setSurgery(val) { document.getElementById('inputSurgery').value = val; }
+
+    function updateResetPatientButton() {
+      const btn = document.getElementById('btnResetPatient');
+      if (btn) btn.classList.toggle('hidden', !currentSession.fullName);
+    }
+
+    function saveProfileAndNext() {
+      const name = document.getElementById('inputName').value.trim();
+      if (!name) { alert('Mohon isi nama lengkap pasien.'); return; }
+      currentSession.fullName = name;
+      currentSession.age = document.getElementById('inputAge').value.trim();
+      currentSession.gender = document.getElementById('inputGender').value;
+      currentSession.surgery = document.getElementById('inputSurgery').value.trim();
+      currentSession.rmNumber = document.getElementById('inputRM').value.trim();
+      updateResetPatientButton();
+      switchTab('checklist');
+    }
+
+    function startNewPatientSession() {
+      if (!confirm('Mulai sesi pasien baru? Formulir akan dikosongkan.')) return;
+      currentSession = {
+        id: Date.now(), fullName: '', age: '', gender: 'Perempuan', surgery: '', rmNumber: '',
+        checklist: { procedure: false, prep: false, sideeffects: false, pain: false },
+        apaisAnswers: [1, 1, 1, 1, 1, 1], anxietyScore: 4, infoScore: 2,
+        specificConcerns: '', timestamp: new Date().toISOString()
+      };
+      document.getElementById('inputName').value = '';
+      document.getElementById('inputAge').value = '';
+      document.getElementById('inputSurgery').value = '';
+      document.getElementById('inputRM').value = '';
+      document.getElementById('inputConcerns').value = '';
+      ['procedure', 'prep', 'sideeffects', 'pain'].forEach(k => {
+        const cb = document.getElementById(`check-${k}`);
+        if (cb) cb.checked = false;
+      });
+      updateProgress();
+      calculateApais();
+      updateResetPatientButton();
+    }
+
+    function toggleCheck(key) {
+      currentSession.checklist[key] = document.getElementById(`check-${key}`).checked;
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const keys = Object.keys(currentSession.checklist);
+      const done = keys.filter(k => currentSession.checklist[k]).length;
+      const pct = Math.round((done / keys.length) * 100);
+      document.getElementById('progressText').innerText = `${done} dari ${keys.length} Domain Selesai`;
+      document.getElementById('progressPercent').innerText = `${pct}%`;
+    }
+
+    function calculateApais() {
+      let answers = [];
+      let anxietyTotal = 0;
+      let infoTotal = 0;
+
+      for (let i = 1; i <= 6; i++) {
+        const radios = document.getElementsByName(`apais${i}`);
+        let val = 1;
+        for (const r of radios) {
+          if (r.checked) { val = parseInt(r.value, 10); break; }
+        }
+        answers.push(val);
+        if (i === 1 || i === 2 || i === 4 || i === 5) anxietyTotal += val;
+        if (i === 3 || i === 6) infoTotal += val;
+      }
+
+      currentSession.apaisAnswers = answers;
+      currentSession.anxietyScore = anxietyTotal;
+      currentSession.infoScore = infoTotal;
+
+      document.getElementById('apaisAnxietyScore').innerText = anxietyTotal;
+      document.getElementById('apaisInfoScore').innerText = infoTotal;
+    }
+
+    // FUNGSI UTAMA: Simpan & Otomatis Kirim ke Google Sheets Anda di Latar Belakang
+    function saveToGoogleSheetsOnly() {
+      calculateApais();
+      currentSession.fullName = document.getElementById('inputName').value.trim() || 'Pasien Pra-Bedah';
+      currentSession.age = document.getElementById('inputAge').value.trim() || '-';
+      currentSession.gender = document.getElementById('inputGender').value || '-';
+      currentSession.surgery = document.getElementById('inputSurgery').value.trim() || '-';
+      currentSession.rmNumber = document.getElementById('inputRM').value.trim() || '-';
+      currentSession.specificConcerns = document.getElementById('inputConcerns').value.trim() || '-';
+      currentSession.timestamp = new Date().toLocaleString('id-ID');
+
+      const alertBox = document.getElementById('statusAlert');
+      alertBox.className = 'status-alert loading';
+      alertBox.innerText = 'Mengirim data ke Google Sheets...';
+      alertBox.style.display = 'block';
+
+      // 1. Simpan ke LocalStorage HP
+      allSessions.push({ ...currentSession });
+      try { localStorage.setItem('siap_operasi_sessions', JSON.stringify(allSessions)); } catch (e) {}
+
+      // 2. Kirim Otomatis ke Google Sheets via Fetch
+      if (GOOGLE_SHEET_WEB_APP_URL && GOOGLE_SHEET_WEB_APP_URL.indexOf("script.google.com") !== -1) {
+        fetch(GOOGLE_SHEET_WEB_APP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(currentSession)
+        })
+        .then(() => {
+          alertBox.className = 'status-alert success';
+          alertBox.innerText = '✅ Data berhasil tersimpan & terkirim ke Google Sheets!';
+          setTimeout(() => switchTab('infohub'), 1200);
+        })
+        .catch(err => {
+          console.log("Error Sheets:", err);
+          alertBox.className = 'status-alert success';
+          alertBox.innerText = '✅ Data tersimpan di perangkat.';
+          setTimeout(() => switchTab('infohub'), 1200);
+        });
+      } else {
+        alertBox.className = 'status-alert success';
+        alertBox.innerText = '✅ Data berhasil tersimpan.';
+        setTimeout(() => switchTab('infohub'), 1200);
+      }
+    }
+
+    const STAFF_ACCESS_PASSWORD = '280428';
+    let pendingProtectedTarget = null;
+
+    function requestProtectedAccess(target) {
+      pendingProtectedTarget = target;
+      const input = document.getElementById('staffPasswordInput');
+      input.value = '';
+      document.getElementById('passwordModal').classList.add('show');
+    }
+
+    function closePasswordModal() { document.getElementById('passwordModal').classList.remove('show'); }
+
+    function submitStaffPassword() {
+      const entered = document.getElementById('staffPasswordInput').value.trim();
+      if (entered !== STAFF_ACCESS_PASSWORD) {
+        document.getElementById('staffPasswordError').classList.remove('hidden');
+        return;
+      }
+      const target = pendingProtectedTarget;
+      closePasswordModal();
+      if (target === 'video') document.getElementById('videoSettingsModal').classList.add('show');
+      else if (target === 'qr_url') document.getElementById('qrUrlSettingsModal').classList.add('show');
+      else if (target === 'research') { renderRecords(); document.getElementById('researchModal').classList.add('show'); }
+    }
+
+    function hideStaffPasswordError() { document.getElementById('staffPasswordError').classList.add('hidden'); }
+    function openVideoSettings() { requestProtectedAccess('video'); }
+    function closeVideoSettings() { document.getElementById('videoSettingsModal').classList.remove('show'); }
+    function openResearchModal() { requestProtectedAccess('research'); }
+    function closeResearchModal() { document.getElementById('researchModal').classList.remove('show'); }
+    function openQrUrlSettings() { closeQrModal(); requestProtectedAccess('qr_url'); }
+    function closeQrUrlSettings() { document.getElementById('qrUrlSettingsModal').classList.remove('show'); openQrModal(); }
+
+    function renderRecords() {
+      const countEl = document.getElementById('recordCount');
+      const listEl = document.getElementById('recordsList');
+      countEl.innerText = allSessions.length;
+      if (allSessions.length === 0) {
+        listEl.innerHTML = '<div class="section-subtitle" style="text-align: center; padding: 20px;">Belum ada data pasien tersimpan.</div>';
+        return;
+      }
+      listEl.innerHTML = allSessions.map(s => `
+        <div class="record-item" style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+          <div>
+            <div style="font-weight: 700;">${s.fullName} (${s.age || '-'} th)</div>
+            <div style="color: var(--slate-600); font-size: 11px;">Kecemasan: ${s.anxietyScore} | Info: ${s.infoScore}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function exportCSV() {
+      if (allSessions.length === 0) { alert('Belum ada data.'); return; }
+      const headers = ['ID', 'Nama', 'Usia', 'Gender', 'Operasi', 'RM', 'Kecemasan', 'Info', 'Waktu'];
+      const rows = allSessions.map(s => [s.id, `"${s.fullName}"`, s.age, s.gender, `"${s.surgery}"`, s.rmNumber, s.anxietyScore, s.infoScore, `"${s.timestamp}"`]);
+      const csv = [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'Rekap_APAIS.csv';
+      link.click();
+    }
+
+    // QR Code Generator & Netlify Integration Link
+    const QR_URL_STORAGE_KEY = 'siap_operasi_qr_net_url_v1';
+    function getActiveQrWebUrl() {
+      try {
+        const saved = localStorage.getItem(QR_URL_STORAGE_KEY);
+        if (saved && saved.trim()) return saved.trim();
+      } catch (e) {}
+      return "https://resplendent-zuccutto-9a64ae.netlify.app";
+    }
+
+    function openQrModal() {
+      const url = getActiveQrWebUrl();
+      document.getElementById('qrActiveUrlText').innerText = url;
+      const canvas = document.getElementById('qrCanvas');
+      // Simple canvas placeholder or generator if needed
+      document.getElementById('qrAccessModal').classList.add('show');
+    }
+    function closeQrModal() { document.getElementById('qrAccessModal').classList.remove('show'); }
+    function copyQrUrl() { navigator.clipboard.writeText(getActiveQrWebUrl()); alert('Tautan disalin!'); }
+    function openQrTargetInBrowser() { window.open(getActiveQrWebUrl(), '_blank'); }
+    function downloadQrPosterPng() { alert('Gunakan tangkapan layar atau generator QR standar untuk poster.'); }
+
+    function saveCustomQrWebUrl() {
+      const val = document.getElementById('customQrWebUrlInput').value.trim();
+      if (val) {
+        try { localStorage.setItem(QR_URL_STORAGE_KEY, val); } catch (e) {}
+        alert('Link Netlify QR berhasil disimpan!');
+      }
+      document.getElementById('qrUrlSettingsModal').classList.remove('show');
+      openQrModal();
+    }
+    function resetQrWebUrl() {
+      try { localStorage.removeItem(QR_URL_STORAGE_KEY); } catch (e) {}
+      alert('Link QR dikembalikan ke default Netlify.');
+    }
+  </script>
+</body>
+</html>
